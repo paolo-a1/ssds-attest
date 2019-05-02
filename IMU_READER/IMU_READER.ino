@@ -75,8 +75,8 @@ LSM9DS1 imu;
 ////////////////////////////
 // Sketch Output Settings //
 ////////////////////////////
-#define PRINT_CALCULATED
-//#define PRINT_RAW
+//#define PRINT_CALCULATED
+#define PRINT_RAW
 #define PRINT_SPEED 0 // 250 ms between prints
 static unsigned long lastPrint = 1; // Keep track of print time
 
@@ -84,7 +84,7 @@ static unsigned long lastPrint = 1; // Keep track of print time
 // a declination to get a more accurate heading. Calculate 
 // your's here:
 // http://www.ngdc.noaa.gov/geomag-web/#declination
-#define DECLINATION -8.58 // Declination (degrees) in Boulder, CO.
+#define DECLINATION 11.84 // Declination (degrees) in Boulder, CO.
 
 void setup() 
 {
@@ -142,7 +142,7 @@ void loop()
   {
     printAccel(); // Print "A: ax, ay, az"
     printGyro();  // Print "G: gx, gy, gz"
-    //printMag();   // Print "M: mx, my, mz"
+    printMag();   // Print "M: mx, my, mz"
     // Print the heading and orientation for fun!
     // Call print attitude. The LSM9DS1's mag x and y
     // axes are opposite to the accelerometer, so my, mx are
@@ -194,11 +194,47 @@ void printGyro()
   Serial.print(abs(gyroz), 2);
   
 #elif defined PRINT_RAW
-  Serial.print(imu.gx);
-  Serial.print(", ");
-  Serial.print(imu.gy);
-  Serial.print(", ");
-  Serial.println(imu.gz);
+  if (imu.gx < 0)
+    Serial.print("$1$");
+  else
+    Serial.print("$0$");
+  if (abs(imu.gx) < 10)
+    Serial.print("0");
+  if (abs(imu.gx) < 100)
+    Serial.print("0");
+  if (abs(imu.gx) < 1000)
+    Serial.print("0");
+  if (abs(imu.gx) < 10000)
+    Serial.print("0");
+  Serial.print(abs(imu.gx));
+
+  if (imu.gy < 0)
+    Serial.print("$1$");
+  else
+    Serial.print("$0$");
+  if (abs(imu.gy) < 10)
+    Serial.print("0");
+  if (abs(imu.gy) < 100)
+    Serial.print("0");
+  if (abs(imu.gy) < 1000)
+    Serial.print("0");
+  if (abs(imu.gy) < 10000)
+    Serial.print("0");
+  Serial.print(abs(imu.gy));
+
+  if (imu.gz < 0)
+    Serial.print("$1$");
+  else
+    Serial.print("$0$");
+  if (abs(imu.gz) < 10)
+    Serial.print("0");
+  if (abs(imu.gz) < 100)
+    Serial.print("0");
+  if (abs(imu.gz) < 1000)
+    Serial.print("0");
+  if (abs(imu.gz) < 10000)
+    Serial.print("0");
+  Serial.print(abs(imu.gz));
 #endif
 }
 
@@ -242,11 +278,42 @@ void printAccel()
 
   
 #elif defined PRINT_RAW 
-  Serial.print(imu.ax);
-  Serial.print(", ");
-  Serial.print(imu.ay);
-  Serial.print(", ");
-  Serial.println(imu.az);
+
+  if (imu.ax < 0)
+    Serial.print("$1$");
+  else
+    Serial.print("$0$");
+  if (abs(imu.ax) < 100)
+    Serial.print("0");
+  if (abs(imu.ax) < 1000)
+    Serial.print("0");
+  if (abs(imu.ax) < 10000)
+    Serial.print("0");
+  Serial.print(abs(imu.ax));
+
+  if (imu.ay < 0)
+    Serial.print("$1$");
+  else
+    Serial.print("$0$");
+  if (abs(imu.ay) < 100)
+    Serial.print("0");
+  if (abs(imu.ay) < 1000)
+    Serial.print("0");
+  if (abs(imu.ay) < 10000)
+      Serial.print("0");
+  Serial.print(abs(imu.ay));
+
+  if (imu.az < 0)
+    Serial.print("$1$");
+  else
+    Serial.print("$0$");
+  if (abs(imu.az) < 100)
+    Serial.print("0");
+  if (abs(imu.az) < 1000)
+    Serial.print("0");
+  if (abs(imu.az) < 10000)
+    Serial.print("0");
+  Serial.print(abs(imu.az));
 #endif
 
 }
@@ -255,7 +322,6 @@ void printMag()
 {  
   // Now we can use the mx, my, and mz variables as we please.
   // Either print them as raw ADC values, or calculated in Gauss.
-  Serial.print("M: ");
 #ifdef PRINT_CALCULATED
   // If you want to print calculated values, you can use the
   // calcMag helper function to convert a raw ADC value to
@@ -266,12 +332,49 @@ void printMag()
   Serial.print(", ");
   Serial.print(imu.calcMag(imu.mz), 2);
   Serial.println(" gauss");
+  
 #elif defined PRINT_RAW
-  Serial.print(imu.mx);
-  Serial.print(", ");
-  Serial.print(imu.my);
-  Serial.print(", ");
-  Serial.println(imu.mz);
+  if (imu.mx < 0)
+    Serial.print("$1$");
+  else
+    Serial.print("$0$");
+  if (abs(imu.mx) < 10)
+    Serial.print("0");
+  if (abs(imu.mx) < 100)
+    Serial.print("0");
+  if (abs(imu.mx) < 1000)
+    Serial.print("0");
+  if (abs(imu.mx) < 10000)
+    Serial.print("0");
+  Serial.print(abs(imu.mx));
+
+  if (imu.my < 0)
+    Serial.print("$1$");
+  else
+    Serial.print("$0$");
+  if (abs(imu.my) < 10)
+    Serial.print("0");
+  if (abs(imu.my) < 100)
+    Serial.print("0");
+  if (abs(imu.my) < 1000)
+    Serial.print("0");
+  if (abs(imu.my) < 10000)
+    Serial.print("0");
+  Serial.print(abs(imu.my));
+
+  if (imu.mz < 0)
+    Serial.print("$1$");
+  else
+    Serial.print("$0$");
+  if (abs(imu.mz) < 10)
+    Serial.print("0");
+  if (abs(imu.mz) < 100)
+    Serial.print("0");
+  if (abs(imu.mz) < 1000)
+    Serial.print("0");
+  if (abs(imu.mz) < 10000)
+    Serial.print("0");
+  Serial.print(abs(imu.mz));
 #endif
 }
 

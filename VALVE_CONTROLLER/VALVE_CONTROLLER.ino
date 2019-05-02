@@ -4,8 +4,13 @@
 #define VALVE_4 10
 #define VALVE_5 11
 #define VALVE_6 12
+#define LOW_PRESSURE_PIN  4
 
 byte valveCommandRaw;
+
+const int analogInPin = A0;  // Analog input pin that the potentiometer is attached to
+int rawPressure = 0;        // value read from the pot
+int psi = 0;        // value output to the PWM (analog out)
 
 void setup() {
   // Set up both ports at 9600 baud. This value is most important
@@ -28,13 +33,23 @@ void setup() {
   pinMode(VALVE_3, OUTPUT);
   pinMode(VALVE_2, OUTPUT);
   pinMode(VALVE_1, OUTPUT);
+  pinMode(LOW_PRESSURE_PIN, OUTPUT);
 }
 
 void loop() {
+  rawPressure = analogRead(analogInPin);
+  psi = map(rawPressure, 245, 1023, 0, 250);
+  if (psi <= 140){
+    Serial.println("1");
+    digitalWrite(LOW_PRESSURE_PIN, HIGH);
+  }
+  else{
+    Serial.println("0");
+    digitalWrite(LOW_PRESSURE_PIN, LOW);
+  }
   if (Serial.available()) { // If data comes in from serial monitor, send it out to XBee
     valveCommandRaw = Serial.read();    // read one character from the I2C
-    Serial.println(valveCommandRaw);
-  
+    //Serial.println(valveCommandRaw);
     char valveCommandArray[9] = {0};
     valveCommandRaw += 128;
     itoa(valveCommandRaw, valveCommandArray, 2);
@@ -42,6 +57,6 @@ void loop() {
     for(byte i = 0; i < 7; i++){
       digitalWrite(8+i,string[i] - '0');
     }
-    Serial.println(valveCommandArray);
+    //Serial.println(valveCommandArray);
   }
 }
