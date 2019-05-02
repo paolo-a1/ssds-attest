@@ -36,6 +36,15 @@ void setup() {
   pinMode(LOW_PRESSURE_PIN, OUTPUT);
 }
 
+void closeValves(){
+  digitalWrite(VALVE_1, LOW);
+  digitalWrite(VALVE_2, LOW);
+  digitalWrite(VALVE_3, LOW);
+  digitalWrite(VALVE_4, LOW);
+  digitalWrite(VALVE_5, LOW);
+  digitalWrite(VALVE_6, LOW);
+}
+
 void loop() {
   rawPressure = analogRead(analogInPin);
   psi = map(rawPressure, 245, 1023, 0, 250);
@@ -57,6 +66,8 @@ void loop() {
     for(byte i = 0; i < 7; i++){
       digitalWrite(8+i,string[i] - '0');
     }
+    delay(100);
+    closeValves();
     //Serial.println(valveCommandArray);
   }
 }
