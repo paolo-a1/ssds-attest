@@ -1,0 +1,6 @@
+%implements s23_b0_yhgrg_ModuleVariables "C"
+
+%function ModuleVariables(block) Output
+
+static uint8_T tmp_3[27] = { 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U };
+%endfunction
