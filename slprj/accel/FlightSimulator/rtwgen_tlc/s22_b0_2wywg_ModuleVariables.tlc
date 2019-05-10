@@ -1,4 +1,4 @@
-%implements s23_b0_yhgrg_ModuleVariables "C"
+%implements s22_b0_2wywg_ModuleVariables "C"
 
 %function ModuleVariables(block) Output
 
