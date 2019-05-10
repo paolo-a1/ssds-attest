@@ -68,7 +68,7 @@ void loop() {
     itoa(valveCommandRaw, valveCommandArray, 2);
     char* string = valveCommandArray + 2; //get rid of the most significant digit as you only want 7 bits
     for(byte i = 0; i < 7; i++){
-      digitalWrite(8+i,string[i] - '0');
+      digitalWrite(7+i,string[i] - '0');
     }
     delay(100);
     closeValves();
