@@ -68,6 +68,7 @@ void loop() {
     }
     delay(100);
     closeValves();
+    delay(100);
     //Serial.println(valveCommandArray);
   }
 }
