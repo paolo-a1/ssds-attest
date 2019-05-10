@@ -1,0 +1,9 @@
+#!/bin/sh
+
+
+# PASSWORD IS 'attest'
+
+
+ssh pi@10.148.5.114
+
+
