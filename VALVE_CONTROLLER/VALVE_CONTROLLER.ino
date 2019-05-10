@@ -70,7 +70,8 @@ void loop() {
     for(byte i = 0; i < 7; i++){
       digitalWrite(7+i,string[i] - '0');
     }
-    delay(100);
+    delay(200);
     closeValves();
+    delay(50);
   }
 }
