@@ -45,20 +45,24 @@ void closeValves(){
   digitalWrite(VALVE_6, LOW);
 }
 
+void flushSerial(){
+  while(Serial.available())
+    Serial.read();
+}
+
 void loop() {
   rawPressure = analogRead(analogInPin);
   psi = map(rawPressure, 245, 1023, 0, 250);
   if (psi <= 140){
-    Serial.println("1");
+    //Serial.println("1");
     digitalWrite(LOW_PRESSURE_PIN, HIGH);
   }
   else{
-    Serial.println("0");
+    //Serial.println("0");
     digitalWrite(LOW_PRESSURE_PIN, LOW);
   }
   if (Serial.available()) { // If data comes in from serial monitor, send it out to XBee
     valveCommandRaw = Serial.read();    // read one character from the I2C
-    //Serial.println(valveCommandRaw);
     char valveCommandArray[9] = {0};
     valveCommandRaw += 128;
     itoa(valveCommandRaw, valveCommandArray, 2);
@@ -68,7 +72,5 @@ void loop() {
     }
     delay(100);
     closeValves();
-    //delay(100);
-    //Serial.println(valveCommandArray);
   }
 }
