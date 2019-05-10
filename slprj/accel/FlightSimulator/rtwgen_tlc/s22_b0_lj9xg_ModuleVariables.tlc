@@ -1,6 +1,0 @@
-%implements s22_b0_lj9xg_ModuleVariables "C"
-
-%function ModuleVariables(block) Output
-
-static uint8_T tmp_3[27] = { 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U };
-%endfunction

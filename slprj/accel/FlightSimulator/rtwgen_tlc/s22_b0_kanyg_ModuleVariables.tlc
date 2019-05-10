@@ -1,0 +1,11 @@
+%implements s22_b0_kanyg_ModuleVariables "C"
+
+%function ModuleVariables(block) Output
+
+static int128m_T tmp = { { 0ULL, 0ULL }/* chunks */ };
+static void *tmp = NULL;
+static int128m_T tmp03_u = { { 0ULL, 0ULL }/* chunks */ };
+static void *tmp_0 = NULL;
+static void *tmp_1 = NULL;
+static uint8_T tmp_3[27] = { 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U };
+%endfunction
